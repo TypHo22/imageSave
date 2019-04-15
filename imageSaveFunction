@@ -1,0 +1,25 @@
+function  imageSave(~)
+%IMAGESAVE 
+% Function for saving all open matlab figures
+%% Andreas Bernatzky 14.04.19
+%%
+%% savepath
+prompt = {'Enter savePath'};
+dlgtitle = 'Save To Path';
+dims = [1 35];
+path = inputdlg(prompt,dlgtitle,dims);
+SavePath=char(string(path{1,1}));
+%% save all open figures to a given path
+ScreenSiz=get(0, 'Screensize');% get the screensize otherwise images get deformed
+FigList = findobj(allchild(0), 'flat', 'Type', 'figure');
+for iFig = 1:length(FigList)
+  FigHandle = FigList(iFig);
+  FigName   = num2str(get(FigHandle, 'Number'));
+  set(0, 'CurrentFigure', FigHandle);
+  savefig(fullfile(SavePath, [FigName '.fig']));
+FigH= set(FigHandle,'Position',ScreenSiz);%adapt .png to screensize
+  saveas(gca, fullfile(SavePath, FigName), 'png');
+end
+
+end
+
