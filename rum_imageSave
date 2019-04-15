@@ -1,0 +1,21 @@
+%% run_imageSave
+%   Example script to demonstrate imageSave
+%% Andreas Bernatzky 16.04.2019
+
+x=-20:0.01:20;
+
+a=sin(x);
+b=cos(x);
+c=sin(x)./x;
+d=cot(x)./(x.^2);
+
+figure(1)
+plot(x,a);
+figure(2)
+plot(x,b);
+figure(3)
+plot(x,c);
+figure(4)
+plot(x,d);
+
+imageSave;
